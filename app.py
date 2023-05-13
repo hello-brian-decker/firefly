@@ -1,5 +1,13 @@
-from fastapi import FastAPI
+from flask import Flask
 import consul
+from pymongo import MongoClient
+client = MongoClient("mongodb://localhost:27017/")
+db = client["mydatabase"]
+collection = db["mycollection"]
+post = {"title": "My post", "content": "This is my first post!"}
+collection.insert_one(post)
+
+
 
 app = FastAPI()
 
@@ -51,3 +59,5 @@ def get_ip_by_name(service_name):
 #   --request POST \
 #   --data '{"key": "value"}' \
 #   http://localhost:8000/json
+
+
